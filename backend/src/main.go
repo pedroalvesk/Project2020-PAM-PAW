@@ -31,10 +31,6 @@ func main() {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
-	// NO AUTH
-	router.GET("/echo/:echo", routes.EchoRepeat)
-
-
 	// AUTH
 	router.NoRoute(func(c *gin.Context) {
 		c.JSON(404, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
