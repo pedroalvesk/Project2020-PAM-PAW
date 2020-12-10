@@ -42,7 +42,7 @@ RUN go get -u github.com/githubnemo/CompileDaemon
 WORKDIR /go/src/api
 
 # Copy everything from the current directory to the Working Directory inside the container
-COPY source/ .
+COPY src/ .
 
 # Generate Documentation (run swagger)
 RUN /go/bin/swag init

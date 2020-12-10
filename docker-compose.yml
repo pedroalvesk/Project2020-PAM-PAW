@@ -3,7 +3,7 @@ version: '3.6'
 services:
   database:
     restart: always
-    container_name: project2020_pam_paw_database
+    container_name: project2020_pampaw_database
     image: postgres:12
     volumes:
       - database-data:/var/lib/postgresql/data/
@@ -15,7 +15,7 @@ services:
       - "5444:5432"
 
   backend:
-    container_name: project2020_pam_paw_backend
+    container_name: project2020_pampaw_backend
     links:
       - database
     restart: always
