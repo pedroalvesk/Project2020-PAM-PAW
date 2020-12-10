@@ -21,7 +21,7 @@ services:
     restart: always
     build: backend/.
     ports:
-      - "8080:8090"
+      - "8090:8090"
     depends_on:
       - database
     volumes:
