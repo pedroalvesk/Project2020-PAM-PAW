@@ -19,7 +19,7 @@ services:
     links:
       - database
     restart: always
-    build: back/.
+    build: backend/.
     ports:
       - "8080:8090"
     depends_on:
