@@ -101,6 +101,8 @@ class LoginActivity : AppCompatActivity() {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
         // TODO : initiate successful logged in experience
+
+        // Show tooltip with username and welcome msgb
         Toast.makeText(
                 applicationContext,
                 "$welcome $displayName",

@@ -1,5 +1,6 @@
 package edu.ufp.projectpampaw.data
 
+import android.util.Log
 import edu.ufp.projectpampaw.data.model.LoggedInUser
 import java.io.IOException
 
@@ -10,6 +11,14 @@ class LoginDataSource {
 
     fun login(username: String, password: String): Result<LoggedInUser> {
         try {
+
+            // This function is called by LoginRepository Login Method
+            // Print on console when function is called.
+            Log.e(this.javaClass.simpleName,
+                "[>] LoginDataSource: executing login function with ($username, $password)"
+            )
+
+
             // TODO: handle loggedInUser authentication
             val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
             return Result.Success(fakeUser)
