@@ -1,4 +1,5 @@
 FROM golang:1.13-alpine
+
 RUN apk update && apk upgrade && apk add --no-cache bash git openssh gcc libc-dev
 
 ##############################
@@ -37,6 +38,9 @@ RUN go get -u github.com/githubnemo/CompileDaemon
 ##############################
 # Configuration
 ##############################
+
+# HOT RELOAD
+RUN go get -u github.com/githubnemo/CompileDaemon
 
 # Set the Current Working Directory inside the container
 WORKDIR /go/src/api
