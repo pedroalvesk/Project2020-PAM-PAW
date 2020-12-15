@@ -16,26 +16,14 @@ var identityKey = "id"
 func init() {
 
 	services.OpenDatabase()
-	services.Db.AutoMigrate(&model.Users{})
+	services.Db.AutoMigrate(&model.User{})
 
 	defer services.Db.Close()
 }
 
-func main() {
+func initialiseRoutes(router *gin.Engine) {
 
-	services.FormatSwagger()
-
-	// Creates a gin router with default middleware:
-	// logger and recovery (crash-free) middleware
-	router := gin.New()
-	router.Use(gin.Logger())
-	router.Use(gin.Recovery())
-
-	// AUTH
-	router.NoRoute(func(c *gin.Context) {
-		c.JSON(404, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
-	})
-
+	// Auth
 	auth := router.Group("/api/v1/auth")
 	{
 		auth.POST("/login", routes.GenerateToken)
@@ -43,6 +31,29 @@ func main() {
 		auth.PUT("/refresh_token", services.AuthorizationRequired(), routes.RefreshToken)
 	}
 
+	// Invoices
+	invoices := router.Group("/api/v1")
+	invoices.Use(services.AuthorizationRequired())
+	{
+		invoices.POST("/invoices", routes.CreateInvoice)
+		invoices.GET("/invoices", routes.GetAllInvoices)
+		invoices.GET("/invoices/:id", routes.GetInvoiceByID)
+		invoices.PUT("/invoices/:id", routes.UpdateInvoiceByID)
+		invoices.DELETE("/invoices/:id", routes.DeleteInvoiceByID)
+	}
+
+	// Swagger
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	router.Run(":8080")
+}
+
+func main() {
+	//services.FormatSwagger()
+
+	router := gin.New()
+	router.Use(gin.Logger())
+	router.Use(gin.Recovery())
+
+	initialiseRoutes(router)
+
+	router.Run(":8090")
 }

@@ -34,6 +34,8 @@ RUN go get github.com/googollee/go-socket.io
 # Hot reload (linux)
 RUN go get -u github.com/githubnemo/CompileDaemon
 
+# Random filenames
+RUN go get github.com/google/uuid
 
 ##############################
 # Configuration
