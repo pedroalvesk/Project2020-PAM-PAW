@@ -8,10 +8,10 @@ type User struct {
 	UpdatedAt time.Time  `json:"-" swaggerignore:"true"`
 	DeletedAt *time.Time `json:"-" swaggerignore:"true" sql:"index"`
 
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username string `json:"username" gorm:"unique;not null"`
+	Password string `json:"password" gorm:"not null"`
 
-	Invoices []Invoice `json:"-" gorm:"foreignkey:UserID"`
+	Invoices []Invoice `json:"-"` // gorm:"foreignkey:UserID"
 }
 
 /*

@@ -7,6 +7,7 @@ import (
 // Create a struct that will be encoded to a JWT.
 // We add jwt.StandardClaims as an embedded type, to provide fields like expiry time
 type Claims struct {
+	UserID             uint   `json:"userID"`
 	Username           string `json:"username"`
 	jwt.StandardClaims `swaggerignore:"true"`
 }

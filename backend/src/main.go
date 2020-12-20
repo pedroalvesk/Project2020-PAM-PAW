@@ -14,9 +14,15 @@ import (
 var identityKey = "id"
 
 func init() {
-
 	services.OpenDatabase()
+
+	// Drop tables
+	services.Db.DropTableIfExists(&model.User{})
+	services.Db.DropTableIfExists(&model.Invoice{})
+
+	// Create tables
 	services.Db.AutoMigrate(&model.User{})
+	services.Db.AutoMigrate(&model.Invoice{})
 
 	defer services.Db.Close()
 }
@@ -32,14 +38,14 @@ func initialiseRoutes(router *gin.Engine) {
 	}
 
 	// Invoices
-	invoices := router.Group("/api/v1")
+	invoices := router.Group("/api/v1/invoices")
 	invoices.Use(services.AuthorizationRequired())
 	{
-		invoices.POST("/invoices", routes.CreateInvoice)
-		invoices.GET("/invoices", routes.GetAllInvoices)
-		invoices.GET("/invoices/:id", routes.GetInvoiceByID)
-		invoices.PUT("/invoices/:id", routes.UpdateInvoiceByID)
-		invoices.DELETE("/invoices/:id", routes.DeleteInvoiceByID)
+		invoices.POST("/", routes.CreateInvoice)
+		invoices.GET("/", routes.GetAllInvoices)
+		invoices.GET("/:id", routes.GetInvoiceByID)
+		invoices.PUT("/:id", routes.UpdateInvoiceByID)
+		invoices.DELETE("/:id", routes.DeleteInvoiceByID)
 	}
 
 	// Swagger

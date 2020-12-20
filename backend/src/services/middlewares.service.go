@@ -1,8 +1,8 @@
 package services
 
 import (
-	"net/http"
 	"api/model"
+	"net/http"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -22,6 +22,7 @@ func AuthorizationRequired() gin.HandlerFunc {
 
 			if claims, ok := token.Claims.(*model.Claims); ok && token.Valid {
 				//fmt.Printf("%v %v", claims.Username, claims.StandardClaims.ExpiresAt)
+				c.Set("userID", claims.UserID)
 				c.Set("username", claims.Username)
 			}
 			OpenDatabase()

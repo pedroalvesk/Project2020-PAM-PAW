@@ -29,6 +29,7 @@ func GenerateTokenJWT(credentials model.User) string {
 
 	// Create the JWT claims, which includes the username and expiry time
 	claims := &model.Claims{
+		UserID:   credentials.ID,
 		Username: credentials.Username,
 		StandardClaims: jwt.StandardClaims{
 			// In JWT, the expiry time is expressed as unix milliseconds
@@ -58,9 +59,7 @@ func ValidateTokenJWT(c *gin.Context) bool {
 	})
 
 	if err != nil {
-		if err == jwt.ErrSignatureInvalid {
-			return false
-		}
+		return false
 	}
 
 	if !tkn.Valid {

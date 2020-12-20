@@ -8,7 +8,11 @@ type Invoice struct {
 	UpdatedAt time.Time  `json:"-" swaggerignore:"true"`
 	DeletedAt *time.Time `json:"-" swaggerignore:"true" sql:"index"`
 
-	UserID   uint   `json:"userID"`
-	Filename string `json:"filename"`
-	Data     string `json:"data"`
+	UserID    uint   `json:"userID"`
+	Filename  string `json:"filename" gorm:"not null"`
+	Extension string `json:"extension" gorm:"not null"`
+
+	Data string `json:"data"`
+
+	Processed bool `json:"processed" gorm:"not null"`
 }

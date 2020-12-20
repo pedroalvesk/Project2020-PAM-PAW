@@ -40,7 +40,18 @@ func RegisterHandler(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": "Bad request!"})
 		return
 	}
+
+	// Check for duplicated username
 	services.OpenDatabase()
+
+	var user model.User
+	services.Db.Where("username = ?", creds.Username).Find(&user)
+
+	if user.ID != 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": "Username already taken!"})
+		return
+	}
+
 	services.Db.Save(&creds)
 
 	defer services.Db.Close()
