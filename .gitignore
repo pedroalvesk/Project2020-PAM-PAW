@@ -1,6 +1,7 @@
 
 ###################################
 ## Backend (golang)
+###################################
 
 # Binaries for programs and plugins
 *.exe

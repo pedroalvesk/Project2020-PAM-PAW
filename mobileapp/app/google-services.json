@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "182395330850",
+    "project_id": "projectpampaw",
+    "storage_bucket": "projectpampaw.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182395330850:android:026705443ed88362a9457b",
+        "android_client_info": {
+          "package_name": "edu.ufp.projectpampaw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182395330850-qch5mpolfuevja75aqi9k8bdgkc21ccu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfX9GmfK8gC_hLxdSVj4YQXBqgOBWW6vo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182395330850-qch5mpolfuevja75aqi9k8bdgkc21ccu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
