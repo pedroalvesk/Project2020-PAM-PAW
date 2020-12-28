@@ -49,6 +49,12 @@ func CreateInvoice(c *gin.Context) {
 	services.Db.Model(&user).Association("Invoices").Append(invoice)
 	defer services.Db.Close()
 
+	//////////////////////////////
+	// RabbitMQ
+	services.RabbitMQConnect()
+	services.RabbitMQSend("/userfiles/" + newFileName)
+	services.RabbitMQClose()
+
 	c.JSON(http.StatusOK, gin.H{"message": invoice})
 }
 

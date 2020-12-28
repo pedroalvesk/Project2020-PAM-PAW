@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"time"
 
+	"github.com/otiai10/gosseract"
 	"github.com/streadway/amqp"
 )
 
@@ -56,7 +58,7 @@ func main() {
 
 	go func() {
 		for d := range msgs {
-			printMsg(d)
+			doWork(d)
 		}
 	}()
 	log.Printf(" [*] Waiting for messages. To exit press CTRL+C")
@@ -70,8 +72,16 @@ func failOnError(err error, msg string) {
 	}
 }
 
-func printMsg(msg amqp.Delivery) {
+func doWork(msg amqp.Delivery) {
 	log.Printf("#####################")
 	log.Printf("Received a message: %s", msg.Body)
 	log.Printf("#####################")
+
+	client := gosseract.NewClient()
+	defer client.Close()
+	client.SetImage(string(msg.Body))
+	text, _ := client.Text()
+	fmt.Println()
+	fmt.Println(text)
+	fmt.Println()
 }
