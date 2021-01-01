@@ -6,7 +6,7 @@ import (
 
 const username = "test"
 const password = "passw0rd"
-const dbHost = "database-gin"
+const dbHost = "database"
 const dbPort = "5432"
 const dbName = "apidb"
 
