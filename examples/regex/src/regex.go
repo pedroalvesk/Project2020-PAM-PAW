@@ -47,6 +47,8 @@ func doWork(text string) {
 	var inv invoice
 
 	inv.Type = getInvoiceType(text)
+	fmt.Println(text)
+	analiseText(text)
 	inv.FullText = text
 
 	var data = make(map[string]string)
@@ -173,3 +175,37 @@ func getInvoiceType(text string) (invoiceType string) {
 //////////////////////////////
 // Invoice Data
 //////////////////////////////
+func analiseText(text string) {
+	analiseTextMeo(text)
+}
+
+func analiseTextMeo(text string) {
+	var keys = map[string]string{
+		"montante": "Montante(...)?[0-9][0-9],[0-9][0-9]",
+		"entidade": "Entidade [0-9][0-9][0-9][0-9]([0-9])?",
+
+		"referencia": "Refer(.)?ncia [0-9][0-9][0-9] [0-9][0-9][0-9] [0-9][0-9][0-9]",
+
+		"valor": "Valor a Pagar(.)?(.)?(.)?[0-9][0-9],[0-9][0-9]",
+		"€":     "€(.)?[0-9][0-9],[0-9][0-9]",
+
+		"nFatura":       "(Fatura: )?.. ../.........",
+		"nReferencia":   "Refer(.)?ncia: [0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]",
+		"nContribuinte": "Contribuinte: [0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]",
+		"nConta":        "Conta: [0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]([0-9])?",
+		"dataEmissao":   "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]",
+	}
+
+	for k, v := range keys {
+
+		re := regexp.MustCompile(v)
+		data := re.FindAllString(text, -1)
+
+		fmt.Print(k, ":")
+		fmt.Printf("%q\n", data)
+
+	}
+
+	os.Exit(1)
+
+}
