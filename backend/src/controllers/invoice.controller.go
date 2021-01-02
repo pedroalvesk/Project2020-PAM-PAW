@@ -58,8 +58,8 @@ func CreateInvoice(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": invoice})
 }
 
-// GetAllInvoices function
-func GetAllInvoices(c *gin.Context) {
+// GetUserInvoices function
+func GetUserInvoices(c *gin.Context) {
 
 	//////////////////////////////
 	// Get user from token

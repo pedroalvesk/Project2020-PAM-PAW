@@ -11,18 +11,17 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-var identityKey = "id"
-
 func init() {
 	services.OpenDatabase()
 
 	// Drop tables
-	services.Db.DropTableIfExists(&model.User{})
-	services.Db.DropTableIfExists(&model.Invoice{})
+	//services.Db.DropTableIfExists(&model.User{})
+	//services.Db.DropTableIfExists(&model.Invoice{})
 
 	// Create tables
 	services.Db.AutoMigrate(&model.User{})
 	services.Db.AutoMigrate(&model.Invoice{})
+	services.CreateMockupData()
 
 	defer services.Db.Close()
 }
@@ -42,10 +41,18 @@ func initialiseRoutes(router *gin.Engine) {
 	invoices.Use(services.AuthorizationRequired())
 	{
 		invoices.POST("/", routes.CreateInvoice)
-		invoices.GET("/", routes.GetAllInvoices)
+		invoices.GET("/", routes.GetUserInvoices)
 		invoices.GET("/:id", routes.GetInvoiceByID)
 		invoices.PUT("/:id", routes.UpdateInvoiceByID)
 		invoices.DELETE("/:id", routes.DeleteInvoiceByID)
+	}
+
+	// Backoffice
+	backoffice := router.Group("/api/v1/backoffice")
+	{
+		backoffice.GET("/all", routes.GetAllData)
+		backoffice.GET("/users", routes.GetAllUsers)
+		backoffice.GET("/invoices", routes.GetAllInvoices)
 	}
 
 	// Swagger
@@ -53,13 +60,8 @@ func initialiseRoutes(router *gin.Engine) {
 }
 
 func main() {
-	//services.FormatSwagger()
-
-	router := gin.New()
-	router.Use(gin.Logger())
-	router.Use(gin.Recovery())
-
+	router := gin.Default()
+	router.Use(services.GinMiddleware("*"))
 	initialiseRoutes(router)
-
-	router.Run(":8090")
+	_ = router.Run(":8090")
 }

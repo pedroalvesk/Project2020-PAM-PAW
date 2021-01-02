@@ -11,9 +11,9 @@ func CreateInvoice(c *gin.Context) {
 	controllers.CreateInvoice(c)
 }
 
-// GetAllInvoices function
-func GetAllInvoices(c *gin.Context) {
-	controllers.GetAllInvoices(c)
+// GetUserInvoices function
+func GetUserInvoices(c *gin.Context) {
+	controllers.GetUserInvoices(c)
 }
 
 // GetInvoiceByID function

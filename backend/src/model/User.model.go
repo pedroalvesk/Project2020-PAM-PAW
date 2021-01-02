@@ -11,10 +11,10 @@ type User struct {
 	Username string `json:"username" gorm:"unique;not null"`
 	Password string `json:"password" gorm:"not null"`
 
-	Invoices []Invoice `json:"-"` // gorm:"foreignkey:UserID"
+	Invoices []Invoice `json:"invoices,omitempty"` // gorm:"foreignkey:UserID"
 }
 
-/*
+/*s
 
 Db.Model(&user).Related(&invoices)
 
