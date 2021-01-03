@@ -12,7 +12,9 @@ type Invoice struct {
 	Filename  string `json:"filename" gorm:"not null"`
 	Extension string `json:"extension" gorm:"not null"`
 
-	Data string `json:"data"`
+	Type     string            `json:"type"`
+	FullText string            `json:"-"` // `json:"fullText"`
+	Data string 				`json:"data"`
 
 	Processed bool `json:"processed" gorm:"not null"`
 }
