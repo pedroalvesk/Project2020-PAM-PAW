@@ -91,7 +91,7 @@ func failOnError(err error, msg string) {
 
 func doWork(msg amqp.Delivery) {
 	log.Printf("#####################")
-	log.Printf("Received a message: %s", msg.Body)
+	log.Printf("Received a new invoice: %s", msg.Body)
 	log.Printf("#####################")
 
 	client := gosseract.NewClient()
@@ -99,8 +99,8 @@ func doWork(msg amqp.Delivery) {
 	client.Languages = []string{"por"} // por
 
 	defer client.Close()
-	log.Printf(string(msg.Body))
-	client.SetImage(string(msg.Body))
+	// TODO: edit this
+	// client.SetImage(string(msg.Body))
 
 	// Full Text
 	text, _ := client.Text()
@@ -111,6 +111,7 @@ func doWork(msg amqp.Delivery) {
 	invoice.Type = getInvoiceType(text)
 	invoice.FullText = text
 
+	// Tell back
 }
 
 func invoiceIsMeo(text string) (isMeo bool) {
