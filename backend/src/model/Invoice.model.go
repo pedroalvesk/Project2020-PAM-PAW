@@ -9,12 +9,13 @@ type Invoice struct {
 	DeletedAt *time.Time `json:"-" swaggerignore:"true" sql:"index"`
 
 	UserID    uint   `json:"userID"`
+	Path      string `json:"path"`
 	Filename  string `json:"filename" gorm:"not null"`
 	Extension string `json:"extension" gorm:"not null"`
 
-	Type     string            `json:"type"`
-	FullText string            `json:"-"` // `json:"fullText"`
-	Data string 				`json:"data"`
+	Type     string `json:"type"`
+	FullText string `json:"-"` // `json:"fullText"`
+	Data     string `json:"data"`
 
 	Processed bool `json:"processed" gorm:"not null"`
 }

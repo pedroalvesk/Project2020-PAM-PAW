@@ -3,6 +3,7 @@ package controllers
 import (
 	"api/model"
 	"api/services"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"path/filepath"
@@ -31,9 +32,10 @@ func CreateInvoice(c *gin.Context) {
 	extension := filepath.Ext(file.Filename)
 
 	// Generate random filename
+	basePath := "/userfiles/"
 	newFileName := uuid.New().String() + extension
 
-	if err := c.SaveUploadedFile(file, "/userfiles/"+newFileName); err != nil {
+	if err := c.SaveUploadedFile(file, basePath+newFileName); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to save the file"})
 		return
 	}
@@ -41,18 +43,24 @@ func CreateInvoice(c *gin.Context) {
 	//////////////////////////////
 	// Create a new invoice on user
 	invoice := model.Invoice{
+		Path: basePath+newFileName,
 		Filename:  newFileName,
 		Extension: extension,
 	}
 
+	// Save
 	services.OpenDatabase()
 	services.Db.Model(&user).Association("Invoices").Append(invoice)
 	defer services.Db.Close()
 
 	//////////////////////////////
+	// toJson
+	inv, _ := json.Marshal(invoice)
+
+	//////////////////////////////
 	// RabbitMQ
 	services.RabbitMQConnect()
-	services.RabbitMQSend("/userfiles/" + newFileName)
+	services.RabbitMQSend(string(inv))
 	services.RabbitMQClose()
 
 	c.JSON(http.StatusOK, gin.H{"message": invoice})
