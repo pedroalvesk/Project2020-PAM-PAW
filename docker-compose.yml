@@ -3,7 +3,6 @@ version: '3.6'
 services:
   database:
     restart: always
-    container_name: project2020_pampaw_database
     image: postgres:12
     volumes:
       - database-data:/var/lib/postgresql/data/
@@ -15,7 +14,6 @@ services:
       - "5444:5432"
 
   backend:
-    container_name: project2020_pampaw_backend
     links:
       - database
     restart: always
@@ -24,8 +22,26 @@ services:
       - "8090:8090"
     depends_on:
       - database
+      - rabbitmq
     volumes:
+      - userfiles-data1:/userfiles
       - ./backend/src:/go/src/api
+
+  ocrservice:
+    build: ocr/.
+    restart: always
+    volumes: 
+      - userfiles-data1:/userfiles
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
 volumes:
   database-data:
+  userfiles-data1:

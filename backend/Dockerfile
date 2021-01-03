@@ -34,6 +34,12 @@ RUN go get github.com/googollee/go-socket.io
 # Hot reload (linux)
 RUN go get -u github.com/githubnemo/CompileDaemon
 
+# Random filenames
+RUN go get github.com/google/uuid
+
+# RabbitMQ
+RUN go get github.com/streadway/amqp
+
 
 ##############################
 # Configuration
@@ -49,7 +55,7 @@ WORKDIR /go/src/api
 COPY src/ .
 
 # Generate Documentation (run swagger)
-RUN /go/bin/swag init
+# RUN /go/bin/swag init
 
 # Build the Go app
 RUN go build -o main .
