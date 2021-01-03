@@ -14,7 +14,7 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
-        val textView = findViewById<TextView>(R.id.textView)
+        val textView = findViewById<TextView>(R.id.textView1)
         val requestQueue = Volley.newRequestQueue(this)
 
         val url = "http://192.168.1.150:8090/api/v1/invoices"
@@ -37,6 +37,7 @@ class MainActivity2 : AppCompatActivity() {
                             val invoices = jsonArray.getJSONObject(i)
                             val extension = invoices.getString("extension")
                             val filename = invoices.getString("filename")
+
                             textView.append(" $filename, $extension\n\n")
                             //val str: String = textView.text.toString()
                         }
