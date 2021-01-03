@@ -5,7 +5,7 @@ import androidx.room.*
 
 @Entity(
     tableName = "invoice",
-    indices = [Index(value = ["customername"])]
+    indices = [Index(value = ["userID"])]
 )
 data class Invoice(
     @PrimaryKey(autoGenerate = true)

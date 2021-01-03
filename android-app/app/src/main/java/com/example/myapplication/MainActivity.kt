@@ -2,7 +2,6 @@ package com.example.myapplication
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -29,14 +28,16 @@ class MainActivity : AppCompatActivity() {
 
         // clearing user_name and password edit text views on reset button click
         btn_reset.setOnClickListener {
-            et_user_name.setText("")
-            et_password.setText("")
+            //et_user_name.setText("")
+            //et_password.setText("")
+            setContentView(R.layout.activity_register)
+
         }
 
         val username = et_user_name.text
         val password = et_password.text
 
-        val url = "http://192.168.1.150:8081/api/v1/auth/login"
+        val url = "http://192.168.1.150:8090/api/v1/auth/login"
 
         // set on-click listener
         btn_submit.setOnClickListener {
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             }
             val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, data,
                     { response ->
+                        setContentView(R.layout.activity_main2)
                     },
                     { error ->
                         // TODO: Handle error
@@ -57,10 +59,6 @@ class MainActivity : AppCompatActivity() {
             )
             val requestQueue = Volley.newRequestQueue(this)
             requestQueue.add(jsonObjectRequest)
-            setContentView(R.layout.activity_main2)
         }
-
-
     }
-
 }

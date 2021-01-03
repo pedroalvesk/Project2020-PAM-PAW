@@ -10,10 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e45577be-8561-4115-ace5-bbbfa9d4ff20" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/Register.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/Invoice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/Invoice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainActivity2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MainActivity2.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main2.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,11 +70,14 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="android.template.529490338">
-      <recent name="com.example.myapplication" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\maria\Documents\Faculdade\Mestrado\Project2020-PAM-PAW\android-app\app\src\main\res" />
+    </key>
+    <key name="android.template.-1476108512">
+      <recent name="com.example.myapplication" />
+    </key>
+    <key name="android.template.529490338">
+      <recent name="com.example.myapplication" />
     </key>
   </component>
   <component name="RunManager">
@@ -155,6 +164,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="286" y="158" key="#PSD/0.0.1536.824@0.0.1536.824" timestamp="1609524833979" />
+    <state x="614" y="202" key="AndroidCreateXmlResourceDialog" timestamp="1609709120912">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="614" y="202" key="AndroidCreateXmlResourceDialog/0.0.1536.824@0.0.1536.824" timestamp="1609709120912" />
     <state x="565" y="159" key="AndroidProcessChooserDialog" timestamp="1609529464648">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -163,22 +176,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="154" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1609703323894" />
-    <state width="1491" height="224" key="GridCell.Tab.0.bottom" timestamp="1609699690142">
+    <state width="1491" height="224" key="GridCell.Tab.0.bottom" timestamp="1609710380375">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="224" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1609699690142" />
-    <state width="1491" height="224" key="GridCell.Tab.0.center" timestamp="1609699690142">
+    <state width="1491" height="224" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1609710380375" />
+    <state width="1491" height="224" key="GridCell.Tab.0.center" timestamp="1609710380374">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="224" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1609699690142" />
-    <state width="1491" height="224" key="GridCell.Tab.0.left" timestamp="1609699690141">
+    <state width="1491" height="224" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1609710380374" />
+    <state width="1491" height="224" key="GridCell.Tab.0.left" timestamp="1609710380374">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="224" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1609699690141" />
-    <state width="1491" height="224" key="GridCell.Tab.0.right" timestamp="1609699690142">
+    <state width="1491" height="224" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1609710380374" />
+    <state width="1491" height="224" key="GridCell.Tab.0.right" timestamp="1609710380374">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="224" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1609699690142" />
+    <state width="1491" height="224" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1609710380374" />
     <state x="277" y="57" key="SettingsEditor" timestamp="1609524920574">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

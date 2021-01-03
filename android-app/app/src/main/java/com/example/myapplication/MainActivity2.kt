@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
@@ -13,27 +14,36 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
+        val textView = findViewById<TextView>(R.id.textView)
+        val requestQueue = Volley.newRequestQueue(this)
 
-        val url = "http://192.168.1.150:8081/api/v1/invoices"
+        val url = "http://192.168.1.150:8090/api/v1/invoices"
 
+        val token =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjAsInVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE2MDk3MDkwMDF9.g6mZR0RbgJOG49ZQ8SEsnrYbHcI2i5RUkgqGoYV-dbk";
         val data = JSONObject()
         try {
             //input your API parameters
-
+            data.put("token", token)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        val jsonObjectRequest = JsonObjectRequest(
-            Request.Method.GET, url, data,
-            { response ->
-
-            },
-            { error ->
-                // TODO: Handle error
-            }
-        )
-        val requestQueue = Volley.newRequestQueue(this)
-        requestQueue.add(jsonObjectRequest)
-        setContentView(R.layout.activity_main2)
+        val request =
+            JsonObjectRequest(Request.Method.GET, url, data,
+                { response ->
+                    try {
+                        val jsonArray = response.getJSONArray("message")
+                        for (i in 0 until jsonArray.length()) {
+                            val employee = jsonArray.getJSONObject(i)
+                            val userID = employee.getString("extension")
+                            val filename = employee.getInt("filename")
+                            textView.append("$userID, $filename\n\n")
+                            //val str: String = textView.text.toString()
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                }, { error -> error.printStackTrace() })
+        requestQueue.add(request)
     }
 }
