@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <UsersPage/>
+    <router-link to="/">Login </router-link>
+    <router-link to="/users">Users </router-link>
+    <router-link to="/invoices">Invoices </router-link>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import UsersPage from "@/components/UsersPage";
 
 export default {
   name: 'App',
   components: {
-    UsersPage,
   }
 }
 </script>
@@ -20,8 +21,13 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
+
+#content {
+  text-align: center;
+  padding-top: 50px;
+}
+
+
 </style>
