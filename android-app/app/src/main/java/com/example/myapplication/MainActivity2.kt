@@ -34,10 +34,10 @@ class MainActivity2 : AppCompatActivity() {
                     try {
                         val jsonArray = response.getJSONArray("message")
                         for (i in 0 until jsonArray.length()) {
-                            val employee = jsonArray.getJSONObject(i)
-                            val userID = employee.getString("extension")
-                            val filename = employee.getInt("filename")
-                            textView.append("$userID, $filename\n\n")
+                            val invoices = jsonArray.getJSONObject(i)
+                            val extension = invoices.getString("extension")
+                            val filename = invoices.getString("filename")
+                            textView.append(" $filename, $extension\n\n")
                             //val str: String = textView.text.toString()
                         }
                     } catch (e: JSONException) {
