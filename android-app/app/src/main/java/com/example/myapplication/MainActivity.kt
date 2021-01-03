@@ -1,17 +1,16 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
-import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import java.util.logging.Level.INFO
-import com.android.volley.toolbox.StringRequest as StringRequest
+import org.json.JSONException
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,11 +21,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // get reference to all views
-        val et_user_name = findViewById(R.id.et_user_name) as EditText
-        val et_password = findViewById(R.id.et_password) as EditText
+        val et_user_name = findViewById<EditText>(R.id.et_user_name)
+        val et_password = findViewById<EditText>(R.id.et_password)
 
-        val btn_reset = findViewById(R.id.btn_reset) as Button
-        val btn_submit = findViewById(R.id.btn_submit) as Button
+        val btn_reset = findViewById<Button>(R.id.btn_reset)
+        val btn_submit = findViewById<Button>(R.id.btn_submit)
 
         // clearing user_name and password edit text views on reset button click
         btn_reset.setOnClickListener {
@@ -34,32 +33,39 @@ class MainActivity : AppCompatActivity() {
             et_password.setText("")
         }
 
+        val username : String = et_user_name.toString()
+        val password : String = et_password.toString()
+
+
+
+        val url = "http://192.168.1.150:8081/api/v1/auth/login"
+
         // set on-click listener
         btn_submit.setOnClickListener {
-            val user_name = et_user_name.text;
-            val password = et_password.text;
+            val data = JSONObject()
+            try {
+                //input your API parameters
+                data.put("username", username)
+                data.put("password", password)
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
 
-            Toast.makeText(this@MainActivity, user_name, Toast.LENGTH_LONG).show()
+            val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, data,
 
-            // Instantiate the RequestQueue.
-            val queue = Volley.newRequestQueue(this)
-            val url = "http://192.168.1.150:8081/api/v1/auth/login"
+                    { response ->
 
-            // Request a string response from the provided URL.
-            val stringRequest = StringRequest(Request.Method.POST, url,
-                { response ->
-                    // Display the first 500 characters of the response string.
-                    Log.e(localClassName, "Response:$response")
-                    et_user_name.setText(response)
-                },
-                { error ->
-                    Log.e(localClassName, "Error on volley:$error")
-                })
+                    },
+                    { error ->
+                        // TODO: Handle error
+                    }
+            )
+            val requestQueue = Volley.newRequestQueue(this)
+            requestQueue.add(jsonObjectRequest)
 
-                queue.add(stringRequest)
+
         }
 
-
-
     }
+
 }
