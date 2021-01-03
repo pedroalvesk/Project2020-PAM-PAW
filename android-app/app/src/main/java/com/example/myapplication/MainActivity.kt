@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
             et_password.setText("")
         }
 
-        val username : String = et_user_name.toString()
-        val password : String = et_password.toString()
+        val username = et_user_name.text
+        val password = et_password.text
 
 
 
@@ -62,7 +62,6 @@ class MainActivity : AppCompatActivity() {
             )
             val requestQueue = Volley.newRequestQueue(this)
             requestQueue.add(jsonObjectRequest)
-
 
         }
 
