@@ -36,8 +36,6 @@ class MainActivity : AppCompatActivity() {
         val username = et_user_name.text
         val password = et_password.text
 
-
-
         val url = "http://192.168.1.150:8081/api/v1/auth/login"
 
         // set on-click listener
@@ -50,11 +48,8 @@ class MainActivity : AppCompatActivity() {
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
-
             val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, data,
-
                     { response ->
-
                     },
                     { error ->
                         // TODO: Handle error
@@ -62,8 +57,9 @@ class MainActivity : AppCompatActivity() {
             )
             val requestQueue = Volley.newRequestQueue(this)
             requestQueue.add(jsonObjectRequest)
-
+            setContentView(R.layout.activity_main2)
         }
+
 
     }
 
