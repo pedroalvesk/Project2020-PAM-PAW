@@ -1,8 +1,13 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
 	"log"
+	"net/http"
 	"regexp"
+	"strings"
 	"time"
 
 	"github.com/otiai10/gosseract"
@@ -18,6 +23,7 @@ type invoice struct {
 	UserID    uint   `json:"userID"`
 	Filename  string `json:"filename" gorm:"not null"`
 	Extension string `json:"extension" gorm:"not null"`
+	Path      string `json:"path`
 
 	Type     string `json:"type"`
 	FullText string `json:"-"` // `json:"fullText"`
@@ -94,24 +100,26 @@ func doWork(msg amqp.Delivery) {
 	log.Printf("Received a new invoice: %s", msg.Body)
 	log.Printf("#####################")
 
+	var invoice invoice
+	json.Unmarshal(msg.Body, &invoice)
+
 	client := gosseract.NewClient()
 	client.SetPageSegMode(gosseract.PSM_AUTO_OSD)
 	client.Languages = []string{"por"} // por
-
 	defer client.Close()
-	// TODO: edit this
-	// client.SetImage(string(msg.Body))
+
+	client.SetImage(invoice.Path)
 
 	// Full Text
 	text, _ := client.Text()
 
 	// Invoice New
-	var invoice invoice
 	invoice.Processed = true
 	invoice.Type = getInvoiceType(text)
 	invoice.FullText = text
 
 	// Tell back
+	sendToServer(invoice)
 }
 
 func invoiceIsMeo(text string) (isMeo bool) {
@@ -161,4 +169,40 @@ func getInvoiceType(text string) (invoiceType string) {
 	}
 
 	return "GENERIC"
+}
+
+func sendToServer(inv invoice) {
+	url := "http://backend:8090/api/v1/ocr/"
+	method := "POST"
+
+	json, err := json.Marshal(inv)
+	if err != nil {
+		panic(err.Error())
+		return
+	}
+
+	payload := strings.NewReader(string(json))
+
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, payload)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	req.Header.Add("Content-Type", "application/json")
+
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(string(body))
 }

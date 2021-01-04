@@ -55,6 +55,9 @@ func initialiseRoutes(router *gin.Engine) {
 		backoffice.GET("/invoices", routes.GetAllInvoices)
 	}
 
+	// OCR
+	router.POST("/api/v1/ocr", routes.UpdateInvoiceByOCR)
+
 	// Swagger
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 }

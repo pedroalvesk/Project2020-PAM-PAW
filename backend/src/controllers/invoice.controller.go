@@ -43,7 +43,7 @@ func CreateInvoice(c *gin.Context) {
 	//////////////////////////////
 	// Create a new invoice on user
 	invoice := model.Invoice{
-		Path: basePath+newFileName,
+		Path:      basePath + newFileName,
 		Filename:  newFileName,
 		Extension: extension,
 	}
@@ -51,6 +51,7 @@ func CreateInvoice(c *gin.Context) {
 	// Save
 	services.OpenDatabase()
 	services.Db.Model(&user).Association("Invoices").Append(invoice)
+	services.Db.Save(&invoice)
 	defer services.Db.Close()
 
 	//////////////////////////////
