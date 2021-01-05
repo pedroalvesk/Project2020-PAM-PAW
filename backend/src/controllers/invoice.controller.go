@@ -50,8 +50,7 @@ func CreateInvoice(c *gin.Context) {
 
 	// Save
 	services.OpenDatabase()
-	services.Db.Model(&user).Association("Invoices").Append(invoice)
-	services.Db.Save(&invoice)
+	services.Db.Model(&user).Association("Invoices").Append(&invoice)
 	defer services.Db.Close()
 
 	//////////////////////////////

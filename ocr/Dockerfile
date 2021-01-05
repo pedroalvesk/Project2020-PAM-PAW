@@ -35,10 +35,10 @@ RUN go get -t github.com/otiai10/gosseract
 # Configuration
 ##############################
 
-WORKDIR /go/src/api
+WORKDIR /go/src/ocr
 
 # Copy everything from the current directory to the Working Directory inside the container
-COPY . .
+COPY src/ .
 
 # Build the Go app
 RUN go build -o main .

@@ -49,6 +49,7 @@ func initialiseRoutes(router *gin.Engine) {
 
 	// Backoffice
 	backoffice := router.Group("/api/v1/backoffice")
+	backoffice.Use(services.AuthorizationRequired())
 	{
 		backoffice.GET("/all", routes.GetAllData)
 		backoffice.GET("/users", routes.GetAllUsers)
