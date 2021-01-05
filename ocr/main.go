@@ -1,6 +1,7 @@
 package main
 
 import (
+	"ocr/models"
 	"log"
 	"regexp"
 	"time"
@@ -9,32 +10,14 @@ import (
 	"github.com/streadway/amqp"
 )
 
-type invoice struct {
-	ID        uint       `json:"id" swaggerignore:"true" gorm:"primary_key"`
-	CreatedAt time.Time  `json:"-" swaggerignore:"true"`
-	UpdatedAt time.Time  `json:"-" swaggerignore:"true"`
-	DeletedAt *time.Time `json:"-" swaggerignore:"true" sql:"index"`
-
-	UserID    uint   `json:"userID"`
-	Filename  string `json:"filename" gorm:"not null"`
-	Extension string `json:"extension" gorm:"not null"`
-
-	Type     string `json:"type"`
-	FullText string `json:"-"` // `json:"fullText"`
-	Data     string `json:"data"`
-
-	Processed bool `json:"processed" gorm:"not null"`
-}
-
 func main() {
-
 	queueName := "NomeDaQueueAqui"
 
 	//////////////////////////////
 	// RabbitMQ
 
 	// Wait for the rabbitmq service to start
-	time.Sleep(7 * time.Second)
+	time.Sleep(20 * time.Second)
 
 	// Connect to RabbitMQ
 	conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
@@ -95,23 +78,26 @@ func doWork(msg amqp.Delivery) {
 	log.Printf("#####################")
 
 	client := gosseract.NewClient()
-	client.SetPageSegMode(gosseract.PSM_AUTO_OSD)
-	client.Languages = []string{"por"} // por
-
+	client.Languages = []string{"por"}
+	err := client.SetPageSegMode(gosseract.PSM_AUTO_OSD)
+	failOnError(err, "Gosseract failed setting PageSegMode: AUTO_OSD")
 	defer client.Close()
+
 	// TODO: edit this
 	// client.SetImage(string(msg.Body))
+	client.SetImage()
 
 	// Full Text
 	text, _ := client.Text()
 
 	// Invoice New
-	var invoice invoice
+	var invoice models.Invoice
 	invoice.Processed = true
 	invoice.Type = getInvoiceType(text)
 	invoice.FullText = text
 
 	// Tell back
+	
 }
 
 func invoiceIsMeo(text string) (isMeo bool) {
