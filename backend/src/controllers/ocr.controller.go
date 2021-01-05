@@ -30,6 +30,13 @@ func UpdateInvoiceByOCR(c *gin.Context) {
 		panic("OCR send invalid invoice")
 	}
 
+	//////////////////////////////
+	// Update invoice
+	databaseInvoice.Processed = true
+	databaseInvoice.Data = receivedInvoice.Data
+	databaseInvoice.Type = receivedInvoice.Type
+	databaseInvoice.FullText = receivedInvoice.FullText
+
 	services.Db.Save(receivedInvoice)
 
 	c.JSON(http.StatusOK, gin.H{"message": "success"})
