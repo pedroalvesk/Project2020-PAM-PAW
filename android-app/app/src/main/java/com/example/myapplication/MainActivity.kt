@@ -34,13 +34,16 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        val username = et_user_name.text
-        val password = et_password.text
-
-        val url = "http://192.168.1.150:8090/api/v1/auth/login"
 
         // set on-click listener
         btn_submit.setOnClickListener {
+
+            val username = et_user_name.text
+            val password = et_password.text
+
+            val url = "http://10.100.14.168:8090/api/v1/auth/login"
+
+
             val data = JSONObject()
             try {
                 //input your API parameters

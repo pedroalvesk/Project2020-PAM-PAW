@@ -17,7 +17,7 @@ class MainActivity2 : AppCompatActivity() {
         val textView = findViewById<TextView>(R.id.textView1)
         val requestQueue = Volley.newRequestQueue(this)
 
-        val url = "http://192.168.1.150:8090/api/v1/invoices"
+        val url = "http://10.100.14.168:8090/api/v1/invoices"
 
         val token =
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjAsInVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE2MDk3MDkwMDF9.g6mZR0RbgJOG49ZQ8SEsnrYbHcI2i5RUkgqGoYV-dbk";
@@ -28,6 +28,17 @@ class MainActivity2 : AppCompatActivity() {
         } catch (e: JSONException) {
             e.printStackTrace()
         }
+        val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, data,
+            { response ->
+                textView.append("SUCCESS\n\n")
+            },
+            { error ->
+                textView.append("EROOR\n\n")
+                // TODO: Handle error
+            }
+        )
+
+        /*
         val request =
             JsonObjectRequest(Request.Method.GET, url, data,
                 { response ->
@@ -45,6 +56,10 @@ class MainActivity2 : AppCompatActivity() {
                         e.printStackTrace()
                     }
                 }, { error -> error.printStackTrace() })
-        requestQueue.add(request)
+
+         */
+        requestQueue.add(jsonObjectRequest)
     }
+
+
 }

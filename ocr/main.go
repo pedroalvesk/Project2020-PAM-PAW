@@ -34,7 +34,7 @@ func main() {
 	// RabbitMQ
 
 	// Wait for the rabbitmq service to start
-	time.Sleep(7 * time.Second)
+	time.Sleep(20 * time.Second)
 
 	// Connect to RabbitMQ
 	conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
