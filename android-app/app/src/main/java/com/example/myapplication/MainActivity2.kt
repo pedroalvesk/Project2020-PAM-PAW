@@ -21,10 +21,6 @@ class MainActivity2 : AppCompatActivity() {
         val textView = findViewById<TextView>(R.id.textView1)
         val requestQueue = Volley.newRequestQueue(this)
 
-<<<<<<< HEAD
-        val url = "http://10.100.54.241:8090/api/v1/invoices"
-
-=======
         val url = "http://10.100.14.168:8090/api/v1/invoices"
 
         val token =
@@ -47,7 +43,7 @@ class MainActivity2 : AppCompatActivity() {
         )
 
         /*
->>>>>>> 33d95e1de3ef0c969f13d238e847d698980d5ccc
+
         val request =
             JsonObjectRequest(Request.Method.GET, url, null,
                 { response ->
@@ -70,8 +66,4 @@ class MainActivity2 : AppCompatActivity() {
         requestQueue.add(jsonObjectRequest)
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 33d95e1de3ef0c969f13d238e847d698980d5ccc
 }

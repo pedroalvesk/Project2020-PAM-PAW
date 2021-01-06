@@ -35,13 +35,10 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-<<<<<<< HEAD
         val username = et_user_name.text
         val password = et_password.text
 
         val url = "http://10.100.54.241:8090/api/v1/auth/login"
-=======
->>>>>>> 33d95e1de3ef0c969f13d238e847d698980d5ccc
 
         // set on-click listener
         btn_submit.setOnClickListener {
