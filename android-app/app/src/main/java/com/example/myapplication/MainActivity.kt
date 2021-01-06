@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         val username = et_user_name.text
         val password = et_password.text
 
-        val url = "http://192.168.1.150:8090/api/v1/auth/login"
+        val url = "http://10.100.54.241:8090/api/v1/auth/login"
 
         // set on-click listener
         btn_submit.setOnClickListener {
@@ -52,6 +53,8 @@ class MainActivity : AppCompatActivity() {
             val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, data,
                     { response ->
                         setContentView(R.layout.activity_main2)
+                        val intent = Intent(this, MainActivity2::class.java)
+                        startActivity(intent)
                     },
                     { error ->
                         // TODO: Handle error
@@ -62,3 +65,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+

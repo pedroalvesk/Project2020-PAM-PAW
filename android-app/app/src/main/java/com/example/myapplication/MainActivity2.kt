@@ -13,23 +13,18 @@ class MainActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+        onPostExecute()
 
+    }
+
+    fun onPostExecute() {
         val textView = findViewById<TextView>(R.id.textView1)
         val requestQueue = Volley.newRequestQueue(this)
 
-        val url = "http://192.168.1.150:8090/api/v1/invoices"
+        val url = "http://10.100.54.241:8090/api/v1/invoices"
 
-        val token =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjAsInVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE2MDk3MDkwMDF9.g6mZR0RbgJOG49ZQ8SEsnrYbHcI2i5RUkgqGoYV-dbk";
-        val data = JSONObject()
-        try {
-            //input your API parameters
-            data.put("token", token)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
         val request =
-            JsonObjectRequest(Request.Method.GET, url, data,
+            JsonObjectRequest(Request.Method.GET, url, null,
                 { response ->
                     try {
                         val jsonArray = response.getJSONArray("message")
@@ -47,4 +42,5 @@ class MainActivity2 : AppCompatActivity() {
                 }, { error -> error.printStackTrace() })
         requestQueue.add(request)
     }
+
 }
