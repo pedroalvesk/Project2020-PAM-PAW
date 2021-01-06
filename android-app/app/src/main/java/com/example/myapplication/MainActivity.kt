@@ -31,8 +31,9 @@ class MainActivity : AppCompatActivity() {
         btn_reset.setOnClickListener {
             //et_user_name.setText("")
             //et_password.setText("")
-            setContentView(R.layout.activity_register)
 
+            val intent = Intent(this, Register::class.java)
+            startActivity(intent)
         }
 
         val username = et_user_name.text
@@ -60,6 +61,8 @@ class MainActivity : AppCompatActivity() {
             val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, data,
                     { response ->
                         setContentView(R.layout.activity_main2)
+
+                        // Change
                         val intent = Intent(this, MainActivity2::class.java)
                         startActivity(intent)
                     },
