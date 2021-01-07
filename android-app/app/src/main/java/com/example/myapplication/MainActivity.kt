@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -28,11 +29,22 @@ class MainActivity : AppCompatActivity() {
 
         // clearing user_name and password edit text views on reset button click
         btn_reset.setOnClickListener {
+<<<<<<< HEAD
 
             setContentView(R.layout.activity_register)
+=======
+            //et_user_name.setText("")
+            //et_password.setText("")
+>>>>>>> 6fd2f7ea5f9daba39d4196806f179247c3169036
 
+            val intent = Intent(this, Register::class.java)
+            startActivity(intent)
         }
 
+        val username = et_user_name.text
+        val password = et_password.text
+
+        val url = "http://10.100.54.241:8090/api/v1/auth/login"
 
         // set on-click listener
         btn_submit.setOnClickListener {
@@ -54,6 +66,10 @@ class MainActivity : AppCompatActivity() {
             val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, data,
                     { response ->
                         setContentView(R.layout.activity_main2)
+
+                        // Change
+                        val intent = Intent(this, MainActivity2::class.java)
+                        startActivity(intent)
                     },
                     { error ->
                         // TODO: Handle error
@@ -64,3 +80,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+

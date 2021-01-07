@@ -7,14 +7,13 @@
   </div>
 </template>
 
-<script>
 
+<script>
 export default {
   name: 'App',
-  components: {
-  }
 }
 </script>
+
 
 <style>
 #app {
@@ -23,11 +22,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-
-#content {
-  text-align: center;
-  padding-top: 50px;
-}
-
 
 </style>
