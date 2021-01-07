@@ -49,11 +49,15 @@ func initialiseRoutes(router *gin.Engine) {
 
 	// Backoffice
 	backoffice := router.Group("/api/v1/backoffice")
+	backoffice.Use(services.AuthorizationRequired())
 	{
 		backoffice.GET("/all", routes.GetAllData)
 		backoffice.GET("/users", routes.GetAllUsers)
 		backoffice.GET("/invoices", routes.GetAllInvoices)
 	}
+
+	// OCR
+	router.POST("/api/v1/ocr", routes.UpdateInvoiceByOCR)
 
 	// Swagger
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

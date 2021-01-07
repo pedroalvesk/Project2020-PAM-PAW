@@ -47,9 +47,9 @@ func CreateMockupData(){
 
 	OpenDatabase()
 
-	Db.Save(users[0])
-	Db.Save(users[1])
-	Db.Save(users[2])
+	Db.Save(&users[0])
+	Db.Save(&users[1])
+	Db.Save(&users[2])
 
 	Db.Model(&users[0]).Association("Invoices").Append(invoices[0])
 	Db.Model(&users[1]).Association("Invoices").Append(invoices[1])
