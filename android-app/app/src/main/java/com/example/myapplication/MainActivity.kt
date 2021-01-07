@@ -28,8 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         // clearing user_name and password edit text views on reset button click
         btn_reset.setOnClickListener {
-            //et_user_name.setText("")
-            //et_password.setText("")
+
             setContentView(R.layout.activity_register)
 
         }
