@@ -1,4 +1,4 @@
-package com.example.myapplication.Database
+package com.example.myapplication.dataBase
 
 import android.content.Context
 import android.util.Log
