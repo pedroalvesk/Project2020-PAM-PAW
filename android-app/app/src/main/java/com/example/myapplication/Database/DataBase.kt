@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.Database
 
 import android.content.Context
 import android.util.Log
@@ -7,9 +7,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @Database(
     entities = [User::class],
@@ -27,7 +24,7 @@ abstract class DataBase : RoomDatabase() {
         @Volatile
         private var INSTANCE: DataBase? = null
 
-        fun getCustomerDatabaseInstance(context: Context): DataBase =
+        fun getUserDatabaseInstance(context: Context): DataBase =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
@@ -43,7 +40,7 @@ abstract class DataBase : RoomDatabase() {
                 //.addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                 .build()
 
-        fun getCustomerDatabaseInstance(
+        fun getUserDatabaseInstance(
             context: Context,
             scope: CoroutineScope
         ): DataBase =
@@ -101,20 +98,20 @@ abstract class DataBase : RoomDatabase() {
          */
         fun cleanAndPopulateCustomersDatabase(customerDao: UsersDao) {
             // Clear all customers from DB
-            customerDao.deleteAllcustomers()
+            customerDao.deleteAllUsers()
             //Populate with some Patinhas customers
-            for (i in 1..LoaderCustomersContentDatabase.COUNT) {
+            for (i in 1..LoaderUsersContentDatabase.COUNT) {
                 //CREATE
-                val customer: User =
+                val user: User =
                     User(
                         i, "Tio Patinhas $i",
                     )
                 Log.e(
                     this.javaClass.simpleName,
-                    "addSampleItemsToDatabase(): create customer = $customer"
+                    "addSampleItemsToDatabase(): create customer = $user"
                 )
                 //INSERT
-                val id: Long = customerDao.insertCustomer(customer)
+                val id: Long = customerDao.insertUser(user)
                 Log.e(
                     this.javaClass.simpleName,
                     "addSampleItemsToDatabase(): added record id = $id"
@@ -132,10 +129,4 @@ abstract class DataBase : RoomDatabase() {
         }
     }
 
-    val MIGRATION_2_3: Migration
-        get() = object : Migration(2, 3) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE tasktypes ADD COLUMN taskpriority INTEGER")
-            }
-        }
 }

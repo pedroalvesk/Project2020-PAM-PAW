@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.Database
 
 import android.util.Log
 import androidx.annotation.WorkerThread
@@ -15,20 +15,20 @@ import androidx.lifecycle.LiveData
  *
  * Pass in the DAO (as a private property in the constructor) instead of the whole database.
  */
-class UserRepository(private val customerDao: UsersDao) {
+class UserRepository(private val userDao: UsersDao) {
 
     // Room executes all queries on a separate thread.
     // The public property is an observable LiveData which notifies  observer when  data changes.
-    val allCustomers: LiveData<List<User>> = customerDao.loadAllCustomers()
+    val allUsers: LiveData<List<User>> = userDao.loadAllUsers()
 
     // Make this a suspend function so the caller knows this must be called on a non-UI thread.
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insertCustomer(user: User) {
+    suspend fun insertUser(user: User) {
         Log.e(
             this.javaClass.simpleName,
             "insertCustomer(): going to insert new customer ${user}"
         )
-        customerDao.insertCustomer(user)
+        userDao.insertUser(user)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.Database
 
 import android.graphics.Bitmap
 import androidx.room.*
