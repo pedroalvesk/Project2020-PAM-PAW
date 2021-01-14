@@ -14,11 +14,8 @@ class MainActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
-<<<<<<< HEAD
-        
-=======
+
         onPostExecute()
->>>>>>> 6fd2f7ea5f9daba39d4196806f179247c3169036
 
     }
 

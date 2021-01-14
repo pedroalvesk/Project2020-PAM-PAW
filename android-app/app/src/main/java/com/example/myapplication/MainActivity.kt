@@ -27,53 +27,38 @@ class MainActivity : AppCompatActivity() {
         val btn_reset = findViewById<Button>(R.id.btn_reset)
         val btn_submit = findViewById<Button>(R.id.btn_submit)
 
-        // clearing user_name and password edit text views on reset button click
         btn_reset.setOnClickListener {
-<<<<<<< HEAD
 
             setContentView(R.layout.activity_register)
-=======
-            //et_user_name.setText("")
-            //et_password.setText("")
->>>>>>> 6fd2f7ea5f9daba39d4196806f179247c3169036
 
             val intent = Intent(this, Register::class.java)
             startActivity(intent)
         }
 
-        val username = et_user_name.text
-        val password = et_password.text
-
-        val url = "http://10.100.54.241:8090/api/v1/auth/login"
-
-        // set on-click listener
         btn_submit.setOnClickListener {
 
             val username = et_user_name.text
             val password = et_password.text
 
-            val url = "http://10.100.14.168:8090/api/v1/auth/login"
+            val url = "http://192.168.56.1:8090/api/v1/auth/login"
 
 
             val data = JSONObject()
             try {
-                //input your API parameters
                 data.put("username", username)
                 data.put("password", password)
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
             val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, data,
-                    { response ->
-                        setContentView(R.layout.activity_main2)
-
-                        // Change
-                        val intent = Intent(this, MainActivity2::class.java)
-                        startActivity(intent)
-                    },
-                    { error ->
-                        // TODO: Handle error
-                    }
+                { response ->
+                    setContentView(R.layout.activity_main2)
+                    val intent = Intent(this, MainActivity2::class.java)
+                    startActivity(intent)
+                },
+                { error ->
+                    // TODO: Handle error
+                }
             )
             val requestQueue = Volley.newRequestQueue(this)
             requestQueue.add(jsonObjectRequest)
