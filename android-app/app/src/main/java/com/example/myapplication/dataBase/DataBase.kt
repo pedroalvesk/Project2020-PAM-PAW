@@ -7,15 +7,19 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.work.impl.WorkDatabaseMigrations.MIGRATION_1_2
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Database(
-    entities = [User::class],
+    entities = [UserInvoice::class],
     //views = [CustomerTaskDetailView::class],
-    version = 0
+    version = 1
 )
 abstract class DataBase : RoomDatabase() {
 
-    abstract fun userDao(): UsersDao
+    abstract fun userDao(): UserInvoiceDao
     //abstract fun customerTaskDao(): CustomerTaskDao
     //abstract fun customerTaskDetailViewDao(): CustomerTaskDetailViewDao
 
@@ -33,7 +37,7 @@ abstract class DataBase : RoomDatabase() {
             Room.databaseBuilder(
                 context.applicationContext,
                 DataBase::class.java,
-                "Customers.db"
+                "User.db"
             )
                 .fallbackToDestructiveMigration()
                 //May use migration objets or each new schema
@@ -53,11 +57,11 @@ abstract class DataBase : RoomDatabase() {
             Room.databaseBuilder(
                 context.applicationContext,
                 DataBase::class.java,
-                "Customers.db"
+                "User.db"
             )
                 .fallbackToDestructiveMigration()
                 //Use migration objects for each new schema evolution
-                //.addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                .addMigrations(MIGRATION_1_2)
                 //Use RoomDatabase.Callback() to clear and repopulate DB instead of migrating
                 .addCallback(CustomersDatabaseCallback(scope))
                 .build()
@@ -96,22 +100,22 @@ abstract class DataBase : RoomDatabase() {
         /**
          * Remove all customers from DB and populate with some customers.
          */
-        fun cleanAndPopulateCustomersDatabase(customerDao: UsersDao) {
+        fun cleanAndPopulateCustomersDatabase(customerDao: UserInvoiceDao) {
             // Clear all customers from DB
-            customerDao.deleteAllUsers()
+            customerDao.deleteUserInvoices()
             //Populate with some Patinhas customers
-            for (i in 1..LoaderUsersContentDatabase.COUNT) {
+            for (i in 1..LoaderContentDatabase.COUNT) {
                 //CREATE
-                val user: User =
-                    User(
-                        i, "Tio Patinhas $i",
+                val user: UserInvoice =
+                    UserInvoice(
+                        i, "Tio Patinhas $i", i,""
                     )
                 Log.e(
                     this.javaClass.simpleName,
                     "addSampleItemsToDatabase(): create customer = $user"
                 )
                 //INSERT
-                val id: Long = customerDao.insertUser(user)
+                val id: Long = customerDao.insertUserInvoice(user)
                 Log.e(
                     this.javaClass.simpleName,
                     "addSampleItemsToDatabase(): added record id = $id"
@@ -123,7 +127,7 @@ abstract class DataBase : RoomDatabase() {
     val MIGRATION_1_2 = object : Migration(1, 2) {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL(
-                "CREATE TABLE `tasktypes` (`id` INTEGER, `tasktitle` TEXT, " +
+                "CREATE TABLE `userInvoice` (`id` INTEGER, `tasktitle` TEXT, " +
                         "PRIMARY KEY(`id`))"
             )
         }

@@ -52,8 +52,8 @@ class MainActivity : AppCompatActivity() {
             }
             val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, data,
                 { response ->
-                    setContentView(R.layout.activity_main2)
-                    val intent = Intent(this, MainActivity2::class.java)
+                    setContentView(R.layout.item_list)
+                    val intent = Intent(this, ItemListActivity::class.java)
                     startActivity(intent)
                 },
                 { error ->
