@@ -43,6 +43,12 @@ services:
       - "5672:5672"
       - "15672:15672"
 
+  frontend:
+    build: frontend/.
+    restart: always
+    ports:
+      - "8080:8080"
+
 volumes:
   database-data:
   userfiles-data1:

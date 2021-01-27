@@ -1,4 +1,4 @@
-# project2020-pam-paw
+# project2020-pam-paw-v2
 
 ## Project setup
 ```
