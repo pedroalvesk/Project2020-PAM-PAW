@@ -8,13 +8,14 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.impl.WorkDatabaseMigrations.MIGRATION_1_2
+import com.example.myapplication.viewModel.UserInvoiceViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(
     entities = [UserInvoice::class],
-    //views = [CustomerTaskDetailView::class],
+    //views = [UserInvoiceViewModel::class],
     version = 1
 )
 abstract class DataBase : RoomDatabase() {
@@ -108,7 +109,7 @@ abstract class DataBase : RoomDatabase() {
                 //CREATE
                 val user: UserInvoice =
                     UserInvoice(
-                        i, "Tio Patinhas $i", i,""
+                        i, "Tio Patinhas $i", i,
                     )
                 Log.e(
                     this.javaClass.simpleName,

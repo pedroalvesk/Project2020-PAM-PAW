@@ -9,10 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.myapplication.dataBase.UserInvoice
+import com.example.myapplication.viewModel.UserInvoiceViewModel
 import org.json.JSONException
 import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
+
+
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         val btn_reset = findViewById<Button>(R.id.btn_reset)
         val btn_submit = findViewById<Button>(R.id.btn_submit)
+
 
         btn_reset.setOnClickListener {
 
@@ -54,6 +59,8 @@ class MainActivity : AppCompatActivity() {
                 { response ->
                     setContentView(R.layout.item_list)
                     val intent = Intent(this, ItemListActivity::class.java)
+//                    val token = response.getJSONArray("token")
+
                     startActivity(intent)
                 },
                 { error ->

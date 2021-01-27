@@ -38,7 +38,7 @@ func initialiseRoutes(router *gin.Engine) {
 
 	// Invoices
 	invoices := router.Group("/api/v1/invoices")
-	invoices.Use(services.AuthorizationRequired())
+	invoices.Use()
 	{
 		invoices.POST("/", routes.CreateInvoice)
 		invoices.GET("/", routes.GetUserInvoices)
@@ -49,7 +49,6 @@ func initialiseRoutes(router *gin.Engine) {
 
 	// Backoffice
 	backoffice := router.Group("/api/v1/backoffice")
-	backoffice.Use(services.AuthorizationRequired())
 	{
 		backoffice.GET("/all", routes.GetAllData)
 		backoffice.GET("/users", routes.GetAllUsers)

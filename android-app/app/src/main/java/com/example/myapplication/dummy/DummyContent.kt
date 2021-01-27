@@ -1,7 +1,7 @@
 package com.example.myapplication.dummy
 
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.*
+
 
 object DummyContent {
 
@@ -30,8 +30,10 @@ object DummyContent {
     }
 
     private fun createDummyItem(position: Int): DummyItem {
+
         return DummyItem(position.toString(), "Item " + position, makeDetails(position))
     }
+
 
     private fun makeDetails(position: Int): String {
         val builder = StringBuilder()

@@ -1,7 +1,10 @@
 package com.example.myapplication.dataBase
 
 import android.content.Context
+import android.os.AsyncTask
 import android.util.Log
+import android.widget.Toast
+import java.lang.ref.WeakReference
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -15,7 +18,7 @@ class LoaderContentDatabase {
 
         private lateinit var db: DataBase //Database
 
-        val COUNT = 18
+        val COUNT = 19
 
         private var _CUSTOMER_ITEMS: MutableList<CustomerItem> = ArrayList()
         val CUSTOMER_ITEMS: MutableList<CustomerItem>
@@ -45,7 +48,7 @@ class LoaderContentDatabase {
         fun createDb(context: Context) {
             Log.e(
                 this.javaClass.simpleName,
-                "createDb(): going to create DB and get customerDao..."
+                "createDb(): going to create DB and get userDao..."
             )
             //Create a version of the DB
             db = DataBase.getUserDatabaseInstance(context)
@@ -67,17 +70,21 @@ class LoaderContentDatabase {
             // Create and Insert some sample Customers.
             for (i in 1..COUNT) {
                 //CREATE
-                val customer: UserInvoice =
+                val user: UserInvoice =
                     UserInvoice(
-                        i, "Tio Patinhas $i",
-                        1,""
+                        i, "User $i",
+                        1,
                     )
                 Log.e(
                     this.javaClass.simpleName,
-                    "addSampleItemsToDatabase(): create customer = $customer"
+                    "addSampleItemsToDatabase(): create customer = $user"
+                )
+                Log.e(
+                    this.javaClass.simpleName,
+                    "BEFORE INSERT"
                 )
                 //INSERT
-                val id: Long = userInvoiceDao.insertUserInvoice(customer)
+                val id: Long = userInvoiceDao.insertUserInvoice(user)
                 Log.e(
                     this.javaClass.simpleName,
                     "addSampleItemsToDatabase(): added record id = $id"
@@ -119,4 +126,6 @@ class LoaderContentDatabase {
     data class CustomerItem(val id: String, val content: String?, val details: String) {
         override fun toString(): String = if (content!=null) content else ""
     }
+
+
 }

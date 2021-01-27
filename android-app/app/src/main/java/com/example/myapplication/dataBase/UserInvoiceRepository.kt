@@ -25,7 +25,7 @@ class UserInvoiceRepository(private val userDao: UserInvoiceDao) {
     suspend fun insertUser(user: UserInvoice) {
         Log.e(
             this.javaClass.simpleName,
-            "insertCustomer(): going to insert new customer ${user}"
+            "insertUser(): going to insert new user ${user}"
         )
         userDao.insertUserInvoice(user)
     }

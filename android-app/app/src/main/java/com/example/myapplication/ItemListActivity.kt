@@ -12,8 +12,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 
 import com.example.myapplication.dummy.DummyContent
+import org.json.JSONException
 
 /**
  * An activity representing a list of Pings. This activity
@@ -53,6 +57,7 @@ class ItemListActivity : AppCompatActivity() {
         }
 
         setupRecyclerView(findViewById(R.id.item_list))
+
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
@@ -101,6 +106,8 @@ class ItemListActivity : AppCompatActivity() {
             holder.idView.text = item.id
             holder.contentView.text = item.content
 
+
+
             with(holder.itemView) {
                 tag = item
                 setOnClickListener(onClickListener)
@@ -110,8 +117,11 @@ class ItemListActivity : AppCompatActivity() {
         override fun getItemCount() = values.size
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
             val idView: TextView = view.findViewById(R.id.id_text)
             val contentView: TextView = view.findViewById(R.id.content)
+
+
         }
     }
 }
