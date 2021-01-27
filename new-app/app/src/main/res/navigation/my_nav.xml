@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="edu.ufp.daodatabase.fragments.list.ListFragment"
+        android:label="Lista de Invoices"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_viewFragment"
+            app:destination="@id/viewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="edu.ufp.daodatabase.fragments.add.AddFragment"
+        android:label="Adicionar novo invoice"
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_addFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/viewFragment"
+        android:name="edu.ufp.daodatabase.fragments.view.ViewFragment"
+        android:label="Ver detalhes"
+        tools:layout="@layout/fragment_view">
+        <action
+            android:id="@+id/action_viewFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <argument
+            android:name="currentItem"
+            app:argType="edu.ufp.daodatabase.data.model.Invoice" />
+    </fragment>
+</navigation>
