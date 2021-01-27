@@ -39,19 +39,17 @@ class ItemDetailActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.detail_toolbar))
 
 
-        LoaderContentDatabase.createDb(this)
-        LoaderContentDatabase.addSampleItemsToDatabase()
+       // LoaderContentDatabase.createDb(this)
+       // LoaderContentDatabase.addSampleItemsToDatabase()
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
 
-        //val url = "http://192.168.56.1:8090/api/v1/invoices"
         val url = "http://192.168.56.1:8090/api/v1/backoffice/invoices"
 
         // Get new or existing CustomersViewModel from ViewModelProvider
-        //customersViewModel = ViewModelProvider(this).get(CustomersViewModel::class.java)
         userViewModel =
             ViewModelProvider(
                 this,
@@ -67,7 +65,6 @@ class ItemDetailActivity : AppCompatActivity() {
                     //val mail = jsonArray.getJSONObject(1)
                     val user = UserInvoice(0, "", 0);
                     userViewModel.insert(user)
-                    // DummyContent.DummyItem(position.toString(), "Item $user", DummyContent.makeDetails(position))
                 }
             } catch (e: JSONException) {
                 e.printStackTrace()
@@ -79,7 +76,6 @@ class ItemDetailActivity : AppCompatActivity() {
 
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity

@@ -15,14 +15,12 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [UserInvoice::class],
-    //views = [UserInvoiceViewModel::class],
-    version = 1
+    views = [UserInvoiceView::class],
+    version = 2
 )
 abstract class DataBase : RoomDatabase() {
 
     abstract fun userDao(): UserInvoiceDao
-    //abstract fun customerTaskDao(): CustomerTaskDao
-    //abstract fun customerTaskDetailViewDao(): CustomerTaskDetailViewDao
 
     //Behaves like a static attribute
     companion object {
@@ -42,7 +40,7 @@ abstract class DataBase : RoomDatabase() {
             )
                 .fallbackToDestructiveMigration()
                 //May use migration objets or each new schema
-                //.addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                .addMigrations(MIGRATION_1_2)
                 .build()
 
         fun getUserDatabaseInstance(
@@ -109,7 +107,7 @@ abstract class DataBase : RoomDatabase() {
                 //CREATE
                 val user: UserInvoice =
                     UserInvoice(
-                        i, "Tio Patinhas $i", i,
+                        i, "User $i", i,
                     )
                 Log.e(
                     this.javaClass.simpleName,
@@ -128,7 +126,7 @@ abstract class DataBase : RoomDatabase() {
     val MIGRATION_1_2 = object : Migration(1, 2) {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL(
-                "CREATE TABLE `userInvoice` (`id` INTEGER, `tasktitle` TEXT, " +
+                "CREATE TABLE `userInvoice` (`id` INTEGER, `tasktitle` TEXT,`id` INTEGER, " +
                         "PRIMARY KEY(`id`))"
             )
         }

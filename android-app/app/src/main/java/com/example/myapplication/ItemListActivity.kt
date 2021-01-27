@@ -12,12 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
+import edu.ufp.pam.examples.masterdetail.dummy.DummyContent
 
-import com.example.myapplication.dummy.DummyContent
-import org.json.JSONException
 
 /**
  * An activity representing a list of Pings. This activity

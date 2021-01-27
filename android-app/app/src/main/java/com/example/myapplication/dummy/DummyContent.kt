@@ -1,7 +1,14 @@
-package com.example.myapplication.dummy
+package edu.ufp.pam.examples.masterdetail.dummy
 
-import java.util.*
+import java.util.ArrayList
+import java.util.HashMap
 
+/**
+ * Helper class for providing sample content for user interfaces created by
+ * Android template wizards.
+ *
+ * TODO: Replace all uses of this class before publishing your app.
+ */
 
 object DummyContent {
 
@@ -30,10 +37,8 @@ object DummyContent {
     }
 
     private fun createDummyItem(position: Int): DummyItem {
-
         return DummyItem(position.toString(), "Item " + position, makeDetails(position))
     }
-
 
     private fun makeDetails(position: Int): String {
         val builder = StringBuilder()

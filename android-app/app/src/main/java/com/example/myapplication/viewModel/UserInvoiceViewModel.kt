@@ -23,12 +23,12 @@ class UserInvoiceViewModel (app: Application) : AndroidViewModel(app) {
     }
 
     /** Launch new (non-blocking) coroutine to insert a customer */
-    fun insert(customer: UserInvoice) =
+    fun insert(user: UserInvoice) =
         viewModelScope.launch(Dispatchers.IO) {
             Log.e(this.javaClass.simpleName,
-                "launch(): async insert new customer ${customer}"
+                "launch(): async insert new customer ${user}"
             )
-            repository.insertUser(customer)
+            repository.insertUser(user)
         }
 
     private val users: MutableLiveData<List<UserInvoice>> by lazy {
@@ -38,11 +38,8 @@ class UserInvoiceViewModel (app: Application) : AndroidViewModel(app) {
     }
 
     fun getUser(id : Int): UserInvoice {
-        Log.e(
-            this.javaClass.simpleName,
-            "$id TESTE"
-        )
-        return UserInvoice(0,"",0)
+
+        return UserInvoice();
     }
 
     /** Do an asynchronous operation to fetch customers */
@@ -57,7 +54,7 @@ class UserInvoiceViewModel (app: Application) : AndroidViewModel(app) {
                 "launch(): loading all customers..."
             )
             val customerDao: UserInvoiceDao = LoaderContentDatabase.getCustomerDao()
-            val allCustomers: Array<UserInvoice> = customerDao.loadAllUserInvoice()
+            allUsers = customerDao.loadAllUserInvoice()
         }
     }
 }

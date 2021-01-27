@@ -1,5 +1,4 @@
 package com.example.myapplication
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -7,13 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
 import com.example.myapplication.dataBase.UserInvoice
-import com.example.myapplication.dummy.DummyContent
 import com.example.myapplication.viewModel.UserInvoiceViewModel
-import org.json.JSONException
+
 
 /**
  * A fragment representing a single Item detail screen.
