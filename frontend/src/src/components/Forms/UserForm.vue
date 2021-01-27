@@ -1,6 +1,6 @@
 <template>
   <div class="login-layout text-left">
-    <b-form @submit="onSubmit">
+    <b-form @submit="submitForm">
 
       <!-- Username -->
       <b-form-group id="input-group-1" label="Username:" label-for="input-1">
@@ -9,7 +9,7 @@
 
       <!-- Password -->
       <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-        <b-form-input id="input-2" v-model="passwordField" type="password" required></b-form-input>
+        <b-form-input id="input-2" v-model="passwordField" type="password" required></b-form-input> <!--  v-b-toggle:disabled="this.$props.editable"  -->
       </b-form-group>
 
       <!-- Button -->
@@ -21,27 +21,47 @@
 
 <script>
 export default {
-  name: "Form",
+  name: "UserForm",
 
+  // Arguments
   props: {
+    editable: Boolean,
+    eventName: String,
     buttonText: String,
+    user: {
+      username: String,
+      password: String,
+    }
   },
 
-  // Data (variables)
+  // States
+  mounted() {
+    // this.usernameField = this.$props.user.username | "";
+    // this.passwordField = this.$props.user.password | "";
+  },
+
+
+  // Variables
   data() {
     return {
-      usernameField: "",
-      passwordField: "",
+      usernameField: this.$props.user.username | "",
+      passwordField: this.$props.user.password | "",
     }
   },
 
   // Functions
   methods: {
-    onSubmit(event){
+    submitForm(event){
       event.preventDefault()
-      this.$emit("submit", [this.usernameField, this.passwordField])
+      if(this.$props.editable){
+        this.$emit(this.$props.eventName, {
+          "username": this.usernameField,
+          "password": this.passwordField,
+        })
+      }
     }
   }
+
 }
 </script>
 

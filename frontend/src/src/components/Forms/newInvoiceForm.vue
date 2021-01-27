@@ -1,9 +1,9 @@
 <template>
   <div class="login-layout text-left">
-    <b-form @submit="onSubmit">
+    <b-form @submit="submitForm">
 
       <!-- User -->
-      <b-form-group id="input-group-1" label="Usuário:" label-for="input-1">
+      <b-form-group id="input-group-1" label="User:" label-for="input-1">
         <b-form-input id="input-1" v-model="user" type="text" required></b-form-input>
       </b-form-group>
 
@@ -22,7 +22,7 @@
       </b-form-group>
 
       <!-- Button -->
-      <b-button type="submit" variant="outline-primary">{{this.$props.buttonText}}</b-button>
+      <b-button type="submit" variant="outline-primary">Criar</b-button>
     </b-form>
 
   </div>
@@ -30,13 +30,14 @@
 
 <script>
 export default {
-  name: "InvoiceForm",
+  name: "newInvoiceForm",
 
+  // Props
   props: {
-    buttonText: String,
+    eventName: String,
   },
 
-  // Data (variables)
+  // Variables
   data() {
     return {
       file: null,
@@ -46,11 +47,15 @@ export default {
 
   // Functions
   methods: {
-    onSubmit(event){
+    submitForm(event){
       event.preventDefault()
-      this.$emit("submit", [this.usernameField, this.passwordField])
+      this.$emit(this.$props.eventName, {
+        "file": this.file,
+        "user": this.user
+      })
     }
   }
+
 }
 </script>
 

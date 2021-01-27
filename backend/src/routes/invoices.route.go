@@ -7,8 +7,8 @@ import (
 )
 
 // CreateInvoice function
-func CreateInvoice(c *gin.Context) {
-	controllers.CreateInvoice(c)
+func CreateInvoiceUser(c *gin.Context) {
+	controllers.CreateInvoiceUser(c)
 }
 
 // GetUserInvoices function

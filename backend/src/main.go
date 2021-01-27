@@ -40,7 +40,7 @@ func initialiseRoutes(router *gin.Engine) {
 	invoices := router.Group("/api/v1/invoices")
 	invoices.Use(services.AuthorizationRequired())
 	{
-		invoices.POST("/", routes.CreateInvoice)
+		invoices.POST("/", routes.CreateInvoiceUser)
 		invoices.GET("/", routes.GetUserInvoices)
 		invoices.GET("/:id", routes.GetInvoiceByID)
 		invoices.PUT("/:id", routes.UpdateInvoiceByID)
@@ -49,11 +49,17 @@ func initialiseRoutes(router *gin.Engine) {
 
 	// Backoffice
 	backoffice := router.Group("/api/v1/backoffice")
-	backoffice.Use(services.AuthorizationRequired())
 	{
 		backoffice.GET("/all", routes.GetAllData)
 		backoffice.GET("/users", routes.GetAllUsers)
+		backoffice.PUT("/users/:id", routes.UpdateUser)
+		backoffice.DELETE("/users/:id", routes.DeleteUser)
+
 		backoffice.GET("/invoices", routes.GetAllInvoices)
+		backoffice.POST("/invoices/:id", routes.CreateInvoice)
+		backoffice.PUT("/invoices/:id", routes.UpdateInvoice)
+		backoffice.DELETE("/invoices/:id", routes.DeleteInvoice)
+
 	}
 
 	// OCR

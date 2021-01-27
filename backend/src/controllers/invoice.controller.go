@@ -13,7 +13,7 @@ import (
 )
 
 // CreateInvoice function
-func CreateInvoice(c *gin.Context) {
+func CreateInvoiceUser(c *gin.Context) {
 
 	//////////////////////////////
 	// Get user from token

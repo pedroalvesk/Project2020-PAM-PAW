@@ -43,18 +43,6 @@ services:
       - "5672:5672"
       - "15672:15672"
 
-  frontend:
-    links:
-      - backend
-    restart: always
-    build: frontend/.
-    ports:
-      - "3000:8080"
-    depends_on:
-      - backend
-    volumes:
-      - ./frontend/src:/app
-
 volumes:
   database-data:
   userfiles-data1:

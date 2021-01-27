@@ -16,12 +16,12 @@ export default new Router({
         {
             path: "/users",
             name: "users",
-            component: InvoicePage
+            component: UsersPage
         },
         {
             path: "/invoices",
             name: "invoices",
-            component: UsersPage
+            component: InvoicePage
         },
     ]
 

@@ -4,7 +4,7 @@ import "time"
 
 type Invoice struct {
 	ID        uint       `json:"id" gorm:"primary_key"`
-	CreatedAt time.Time  `json:"-"`
+	CreatedAt time.Time  `json:"createdAt"`
 	UpdatedAt time.Time  `json:"-"`
 	DeletedAt *time.Time `json:"-" sql:"index"`
 
