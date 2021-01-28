@@ -15,13 +15,13 @@ const routes = [
         beforeEnter: redirectIfLoggedIn,
     },
     {
-        path: "/invoices",
+        path: "/invoices/",
         name: "Invoices",
         component: Invoices,
         beforeEnter: needsPermission,
     },
     {
-        path: "/users",
+        path: "/users/",
         name: "Users",
         component: Users,
         beforeEnter: needsPermission,
@@ -36,7 +36,6 @@ const routes = [
 // Auth Middleware
 function needsPermission(to, from, next) {
     const token = window.localStorage.getItem("token");
-    console.log("Token", token);
 
     if(token === null)
         next("/");
@@ -47,7 +46,6 @@ function needsPermission(to, from, next) {
 // Auto Login
 function redirectIfLoggedIn(to, from, next) {
     const token = window.localStorage.getItem("token");
-    console.log("Token", token);
 
     if(token === null)
         next();

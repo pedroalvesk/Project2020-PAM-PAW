@@ -13,6 +13,7 @@ COPY src/package*.json ./
 RUN npm install
 
 # copy project files and folders to the current working directory (i.e. 'app' folder)
+# TODO: exclude node modules
 COPY src/ .
 
 # build app for production with minification
